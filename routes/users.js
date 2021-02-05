@@ -212,6 +212,23 @@ router.post('/reset',async (req,res)=>{
             .catch(err => console.log(err));
         });
     })
+    var smtpTransport = nodemailer.createTransport({
+      service: 'gmail',
+        auth: {
+          user: 'sivabharathi1295@gmail.com',
+          pass: '9943929046'
+      }
+    });
+    var mailOptions = {
+      to: user.email,
+      from: 'passwordreset@demo.com',
+      subject:'sivabharathi1295@gmail.com',
+      text: 'Hello,\n\n' +
+        'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+    };
+    smtpTransport.sendMail(mailOptions, function(err) {
+      done(err);
+    });
   }
 });
 
