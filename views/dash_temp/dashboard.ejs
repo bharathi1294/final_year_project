@@ -1,28 +1,5 @@
 <% include header %>
 <div class="wrapper ">
-    <div class="sidebar" data-color="green" data-background-color="white">
-      <!--
-      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-      Tip 2: you can also add an image using data-image tag
-  -->
-      <div class="logo">
-        <a href="/dashboard" class="simple-text logo-normal">
-            <%= user.name %>
-        </a>
-      </div>
-      <div class="sidebar-wrapper">
-        <ul class="nav">
-          <li class="nav-item active  ">
-            <a class="nav-link" href="#0">
-              <i class="material-icons">dashboard</i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <!-- your sidebar here -->
-        </ul>
-      </div>
-    </div>
     <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
@@ -48,7 +25,9 @@
       </nav>
       <div class="content">
         <div class="container-fluid">
-        <p class="lead mb-3">Welcome <%= user.name %></p>
+          <% include ../login_temp/partials/messages %>
+          <% include file_upload %>
+        
         </div>
         </div>
 <% include footer %> 

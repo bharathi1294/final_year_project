@@ -12,5 +12,85 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
   <!-- Material Kit CSS -->
   <link href="/dashboard/css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 2rem;
+      }
+      
+      table {
+      text-align: left;
+      position: relative;
+      border-collapse: collapse; 
+      }
+      th, td {
+      padding: 0.25rem;
+      }
+      tr.red th {
+      background: red;
+      color: white;
+      }
+      tr.green th {
+      background: green;
+      color: white;
+      }
+      tr.purple th {
+      background: purple;
+      color: white;
+      }
+      th {
+      background: white;
+      position: sticky;
+      top: 0; /* Don't forget this, required for the stickiness */
+      box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
+      }
+      #table-wrapper {
+      position:relative;
+      }
+      #table-scroll {
+      height:750px;
+      overflow:auto;  
+      margin-top:20px;
+      }
+      #table-wrapper table {
+      width:100%;
+      
+      }
+      #table-wrapper table thead th .text {
+      position:absolute;   
+      top:-20px;
+      z-index:2;
+      height:20px;
+      width:35%;
+      border:1px solid red;
+      }
+  </style>
 </head>
 <body>
+  <div class="sidebar" data-color="green" data-background-color="white">
+    <!--
+    Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
+
+    Tip 2: you can also add an image using data-image tag
+-->
+    <div class="logo">
+      <a href="/dashboard" class="simple-text logo-normal">
+          <%= user.name %>
+      </a>
+    </div>
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+        <li class="nav-item active  ">
+          <a class="nav-link" href="/dashboard">
+            <i class="material-icons">dashboard</i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+        <!-- your sidebar here -->
+      </ul>
+    </div>
+  </div>

@@ -1,0 +1,45 @@
+<form action="/upload"
+      enctype="multipart/form-data" method="POST">
+        <span>Upload CSV file:</span>   
+        <div class="custom-file mb-3">
+            <input type="file" class="custom-file-input" id="customFile" name="myFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
+        <button class="btn btn-success">Upload</button> 
+    </form>
+	<div id="table-wrapper">
+	<div id="table-scroll">
+    <table class="table table-striped table-hover">
+        <thead>
+            <%if (header.length >0){ %>
+				<tr>
+                <% header.forEach(function(head){ %>
+                <th><%= head %> </th>
+        <% }) %></tr>
+		<% }else{ %>
+            <tr>
+                <th colspan="6">No Record Found</th>
+            </tr>
+        <% } %>
+        </thead>
+        <tbody>
+			<% if(header.length >0){ %>
+				<% for(var i=0;i<data.length;i++){%>
+					<tr>
+						<% for(var j=0;j<header.length;j++){%>
+							<td><%= data[i][header[j]]%></td>
+						<% } %>
+					</tr> 
+			<%}%>
+			<% }%>
+        </tbody>
+        </table>
+	</div>
+	</div>
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
