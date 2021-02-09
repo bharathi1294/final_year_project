@@ -60,6 +60,11 @@
             </div>
           </div>
     </div>
+    <%if (header.length >0){ %>
+    <form action="/download" method="GET">
+      <button class="btn btn-success" style="float: right;">Download</button>
+    </form><br><br>
+    <% } %>
 	<div id="table-wrapper">
 	<div id="table-scroll">
     <table class="table table-striped table-hover">

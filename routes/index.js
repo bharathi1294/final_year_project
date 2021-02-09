@@ -11,9 +11,9 @@ router.get('/', forwardAuthenticated, (req, res) => res.render('login_temp/login
 
 var header = []
 var results = []
-
+var download_file = ' '
 // Dashboard
-router.get('/dashboard', ensureAuthenticated,(req, res)=>{
+router.get('/dashboard', ensureAuthenticated,async(req, res)=>{
   res.render('dash_temp/dashboard', {
     user: req.user,
     header:header,
@@ -38,7 +38,7 @@ const count_null_values = (header,data)=>{
 
 //upload
 router.post('/upload',ensureAuthenticated,upload,(req,res,next)=>{
-  console.log(req.file.filename)
+  download_file = req.file.filename
     const file = new file_db({
         filename:req.file.filename,
         userId:req.user._id
@@ -61,5 +61,13 @@ router.post('/upload',ensureAuthenticated,upload,(req,res,next)=>{
     req.flash("success_msg","File uploaded successfully!")
     res.redirect('/dashboard')
 })
+//Download File
 
+router.get('/download',async (req,res)=>{
+  const files = await file_db.find({userId:req.user._id})
+  var filenames = files.map(obj => obj.filename)
+  if(filenames.indexOf(download_file) != -1){
+    res.download('./public/uploads/'+download_file)
+  }
+})
 module.exports = router;
