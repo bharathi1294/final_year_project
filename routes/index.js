@@ -26,13 +26,19 @@ router.get('/dash',ensureAuthenticated,(re,res)=>{
 })
 // Dashboard
 router.get('/dashboard', ensureAuthenticated,async(req, res)=>{
+  var files = await file_db.find({userId:req.user._id})
   res.render('dash_temp/dashboard', {
     user: req.user,
     header:header,
     data:results.slice(0,400),
     null_values:count_null_values(header,results),
-    r_count:row_count
+    r_count:row_count,
+    files:files,
+    c_filename:download_file
   })
+  header.length = 0
+  row_count = 0
+  results.length = 0
 });
 
 //count null values
@@ -54,9 +60,56 @@ router.post('/upload',ensureAuthenticated,upload,async (req,res,next)=>{
         filename:req.file.filename,
         userId:req.user._id
     })
-    try{
-        const newFile = file.save();
-        fs.createReadStream('./public/uploads/'+req.file.filename)
+    const newFile = file.save();
+    parseCsv(req.file.filename)
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    req.flash("success_msg","File uploaded successfully!")
+    res.redirect('/dashboard')
+})
+
+//open specific file
+router.get('/file/:filename',async(req,res)=>{
+  download_file = req.params.filename
+  parseCsv(req.params.filename)
+  await new Promise(resolve => setTimeout(resolve, 2000));
+  res.redirect('/dashboard')
+})
+
+//Download File
+
+router.get('/download',async (req,res)=>{
+  try{
+  const files = await file_db.find({userId:req.user._id})
+  var filenames = files.map(obj => obj.filename)
+  if(filenames.indexOf(download_file) != -1){
+    res.download('./public/uploads/'+download_file)
+  }}catch(e){
+    console.log(e)
+  }
+})
+
+//drop file
+
+router.get('/delete',async (req,res)=>{
+  const files = await file_db.find({userId:req.user._id})
+  var filenames = files.map(obj => obj.filename)
+  if(filenames.indexOf(download_file) != -1){
+    const file_content = await file_db.find({filename:download_file})
+    fs.unlink('./public/uploads/'+download_file,(err) => {
+      if (err) throw err;
+    });
+    file_db.findByIdAndDelete(file_content[0]._id,function (err, docs) { 
+      if (err){ 
+          console.log(err) 
+      }
+  });
+  }
+  res.redirect('/dashboard')
+})
+
+const parseCsv = (csv_filename)=>{
+  try{
+  fs.createReadStream('./public/uploads/'+csv_filename)
         .pipe(csv({ separator: ',',from_line:2}))
         .on('headers', (headers) => {
             header = headers.map(obj => obj);
@@ -70,18 +123,6 @@ router.post('/upload',ensureAuthenticated,upload,async (req,res,next)=>{
     }catch(e){
         console.log(e)
     }
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    req.flash("success_msg","File uploaded successfully!")
-    res.redirect('/dashboard')
-})
-//Download File
-
-router.get('/download',async (req,res)=>{
-  const files = await file_db.find({userId:req.user._id})
-  var filenames = files.map(obj => obj.filename)
-  if(filenames.indexOf(download_file) != -1){
-    res.download('./public/uploads/'+download_file)
-  }
-})
+}
 
 module.exports = router;

@@ -59,10 +59,20 @@
               </div>
             </div>
           </div>
-    </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <p>Recent files</p>
+            <% files.forEach(function(file){ %>
+              <a href="/file/<%= file.filename %>"><%= file.filename %></a><hr>
+            <% })%>  
+          </div>
+    </div> 
     <%if (header.length >0){ %>
+    <h4><%= c_filename %></h4>
     <form action="/download" method="GET">
       <button class="btn btn-success" style="float: right;">Download</button>
+    </form>
+    <form action="/delete" method="GET">
+      <button class="btn btn-danger" style="float:left;">Drop</button>
     </form><br><br>
     <% } %>
 	<div id="table-wrapper">
