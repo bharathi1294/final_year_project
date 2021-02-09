@@ -1,12 +1,65 @@
 <form action="/upload"
       enctype="multipart/form-data" method="POST">
-        <span>Upload CSV file:</span>   
+        <span>Upload CSV file:</span><br><br>
         <div class="custom-file mb-3">
             <input type="file" class="custom-file-input" id="customFile" name="myFile" accept=".csv">
             <label class="custom-file-label" for="customFile">Choose file</label>
         </div>
         <button class="btn btn-success">Upload</button> 
     </form>
+    <div class="row">
+        <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-stats">
+            <div class="card-header card-header-success card-header-icon">
+              <div class="card-icon">
+                <i class="material-icons">chrome_reader_mode</i>
+              </div>
+              <p class="card-category">Total rows</p>
+              <h3 class="card-title"><%= data.length %> 
+                <small>rows</small>
+              </h3>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-header card-header-success card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">amp_stories</i>
+                </div>
+                <p class="card-category">Total columns</p>
+                <h3 class="card-title"><%= header.length %> 
+                    <small>columns</small>
+                </h3>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-header card-header-danger card-header-icon">
+                <div class="card-icon">
+                  <i class="material-icons">info_outline</i>
+                </div>
+                <p class="card-category">Null values</p>
+                <h3 class="card-title"><%= null_values %>
+                    <small>values</small>
+                </h3>
+              </div>
+              <div class="card-footer">
+                <div class="stats">
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
 	<div id="table-wrapper">
 	<div id="table-scroll">
     <table class="table table-striped table-hover">
@@ -18,7 +71,7 @@
         <% }) %></tr>
 		<% }else{ %>
             <tr>
-                <th colspan="6">No Record Found</th>
+                <h3 style="text-align: center;">No data</h3>
             </tr>
         <% } %>
         </thead>
@@ -28,7 +81,7 @@
 					<tr>
 						<% for(var j=0;j<header.length;j++){%>
 							<td><%= data[i][header[j]]%></td>
-						<% } %>
+						<% }%>
 					</tr> 
 			<%}%>
 			<% }%>
@@ -36,6 +89,7 @@
         </table>
 	</div>
 	</div>
+    <br><br>
     <script>
         // Add the following code if you want the name of the file appear on select
         $(".custom-file-input").on("change", function() {

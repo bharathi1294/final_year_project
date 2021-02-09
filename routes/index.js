@@ -17,11 +17,24 @@ router.get('/dashboard', ensureAuthenticated,(req, res)=>{
   res.render('dash_temp/dashboard', {
     user: req.user,
     header:header,
-    data:results
+    data:results,
+    null_values:count_null_values(header,results)
   })
   header.length = 0
   results.length = 0
 });
+
+//count null values
+const count_null_values = (header,data)=>{
+      var missing_value = 0
+      for(var i=0;i<data.length;i++){
+        for(var j=0;j<header.length;j++){
+              if(data[i][header[j]].length == 0){ 
+                    missing_value+=1
+          }} 
+      }
+        return missing_value
+}
 
 //upload
 router.post('/upload',ensureAuthenticated,upload,(req,res,next)=>{
