@@ -7,21 +7,32 @@ const csv = require('csv-parser');
 const fs = require('fs');
 
 // Welcome Page
-router.get('/', forwardAuthenticated, (req, res) => res.render('login_temp/login'));
+router.get('/', forwardAuthenticated, (req, res) => {
+  res.render('login_temp/login')
+});
 
 var header = []
 var results = []
+var row_count = 0
 var download_file = ' '
+
+//home
+
+router.get('/dash',ensureAuthenticated,(re,res)=>{
+  header.length = 0
+  row_count = 0
+  results.length = 0
+  res.redirect('/dashboard')
+})
 // Dashboard
 router.get('/dashboard', ensureAuthenticated,async(req, res)=>{
   res.render('dash_temp/dashboard', {
     user: req.user,
     header:header,
-    data:results,
-    null_values:count_null_values(header,results)
+    data:results.slice(0,400),
+    null_values:count_null_values(header,results),
+    r_count:row_count
   })
-  header.length = 0
-  results.length = 0
 });
 
 //count null values
@@ -37,7 +48,7 @@ const count_null_values = (header,data)=>{
 }
 
 //upload
-router.post('/upload',ensureAuthenticated,upload,(req,res,next)=>{
+router.post('/upload',ensureAuthenticated,upload,async (req,res,next)=>{
   download_file = req.file.filename
     const file = new file_db({
         filename:req.file.filename,
@@ -52,12 +63,14 @@ router.post('/upload',ensureAuthenticated,upload,(req,res,next)=>{
           })
         .on('data', (data) => {
             results.push(data)
+            row_count+=1
         })
         .on('end', () => {
         });
     }catch(e){
         console.log(e)
     }
+    await new Promise(resolve => setTimeout(resolve, 2000));
     req.flash("success_msg","File uploaded successfully!")
     res.redirect('/dashboard')
 })
@@ -70,4 +83,5 @@ router.get('/download',async (req,res)=>{
     res.download('./public/uploads/'+download_file)
   }
 })
+
 module.exports = router;
