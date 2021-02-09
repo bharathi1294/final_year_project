@@ -22,11 +22,13 @@ router.get('/dash',ensureAuthenticated,(re,res)=>{
   header.length = 0
   row_count = 0
   results.length = 0
+  download_file = ''
   res.redirect('/dashboard')
 })
+
 // Dashboard
 router.get('/dashboard', ensureAuthenticated,async(req, res)=>{
-  var files = await file_db.find({userId:req.user._id})
+  var files = await file_db.find({userId:req.user._id}).sort({$natural:-1})
   res.render('dash_temp/dashboard', {
     user: req.user,
     header:header,
@@ -76,7 +78,6 @@ router.get('/file/:filename',async(req,res)=>{
 })
 
 //Download File
-
 router.get('/download',async (req,res)=>{
   try{
   const files = await file_db.find({userId:req.user._id})
@@ -91,6 +92,7 @@ router.get('/download',async (req,res)=>{
 //drop file
 
 router.get('/delete',async (req,res)=>{
+  try{
   const files = await file_db.find({userId:req.user._id})
   var filenames = files.map(obj => obj.filename)
   if(filenames.indexOf(download_file) != -1){
@@ -103,8 +105,12 @@ router.get('/delete',async (req,res)=>{
           console.log(err) 
       }
   });
+  download_file = ''
   }
   res.redirect('/dashboard')
+}catch(e){
+  console.log(e)
+}
 })
 
 const parseCsv = (csv_filename)=>{
@@ -124,5 +130,9 @@ const parseCsv = (csv_filename)=>{
         console.log(e)
     }
 }
+
+router.get('/analysis',ensureAuthenticated,(req,res)=>{
+  res.render('dash_temp/analysis',{filename:download_file})
+})
 
 module.exports = router;
