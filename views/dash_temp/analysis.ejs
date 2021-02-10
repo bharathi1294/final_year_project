@@ -27,7 +27,12 @@
       <div class="content">
         <div class="container-fluid">
             <p>Selected CSV file: </p>
-            <h4><%= filename %> </h4> <p><a href="/dashboard">Select/Upload file</a></p>
+            <% if(filename.length!=0){%> 
+            <h4><%= filename %> </h4>
+            <% }else{ %>
+              <h4>No file selected!</h4>
+              <p><a href="/dashboard">Select/Upload file</a></p>
+            <% } %> 
             <form action="/file/clean" method="POST">
                 <input type="hidden" name="filename" value="<%= filename %> ">
                 <button>Click</button>
