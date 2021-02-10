@@ -1,5 +1,4 @@
 <% include header %>
-<% include header %>
 <div class="wrapper ">
     <div class="main-panel">
       <!-- Navbar -->
@@ -27,16 +26,19 @@
       <div class="content">
         <div class="container-fluid">
             <p>Selected CSV file: </p>
-            <% if(filename.length!=0){%> 
+            <% if(filename.length != 0){%> 
             <h4><%= filename %> </h4>
             <% }else{ %>
               <h4>No file selected!</h4>
-              <p><a href="/dashboard">Select/Upload file</a></p>
-            <% } %> 
+            <% } %>
+            <p><a href="/dashboard">Select/Change file</a></p>
+            <% if(filename.length != 0){%> 
             <form action="/file/clean" method="POST">
-                <input type="hidden" name="filename" value="<%= filename %> ">
-                <button>Click</button>
+                <input type="hidden" name="filename" value="<%=filename%>">
+                <button class="btn btn-success">View</button>
             </form>
+            <% } %> 
+            <%  include clean %> 
         </div>
         </div>
 <% include footer %> 

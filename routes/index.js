@@ -70,7 +70,7 @@ router.post('/upload',ensureAuthenticated,upload,async (req,res,next)=>{
 })
 
 //open specific file
-router.get('/file/:filename',async(req,res)=>{
+router.get('/file_name/:filename',async(req,res)=>{
   download_file = req.params.filename
   parseCsv(req.params.filename)
   await new Promise(resolve => setTimeout(resolve, 2000));
@@ -132,7 +132,7 @@ const parseCsv = (csv_filename)=>{
 }
 
 router.get('/analysis',ensureAuthenticated,(req,res)=>{
-  res.render('dash_temp/analysis',{filename:download_file})
+  res.render('dash_temp/analysis',{filename:download_file,columns:[]})
 })
 
 module.exports = router;

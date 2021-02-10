@@ -62,7 +62,7 @@
           <div class="col-lg-3 col-md-6 col-sm-6">
             <p>Recent files</p>
             <% files.forEach(function(file){ %>
-              <a href="/file/<%= file.filename %>"><%= file.filename %></a><hr>
+              <a href="/file_name/<%= file.filename %>"><%= file.filename %></a><hr>
             <% })%>  
           </div>
     </div> 
@@ -86,7 +86,7 @@
         <% }) %></tr>
 		<% }else{ %>
             <tr>
-                <h3 style="text-align: center;">Click file to view!..</h3>
+                <h3 style="text-align: center;">Upload/Click file to view!..</h3>
             </tr>
         <% } %>
         </thead>

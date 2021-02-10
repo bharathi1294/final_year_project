@@ -1,0 +1,25 @@
+<%if(columns.length >0){%>
+<div id="table-wrapper">
+    <div id="table-scroll-1">
+    <table class="table table-striped table-hover">
+        <thead>
+            <th>Column name</th>
+            <th>Data types</th>
+            <th>Null values</th>
+        </thead>
+        <tbody>
+            <% for(var i=0;i<columns.length;i++){ %>
+                <tr>
+                <td><%=columns[i]%> </td>
+                <td><%=datatypes[i]%> </td>
+                <td><%=missing_values[i]%> </td>
+                <% } %>
+            </tr>  
+        </tbody>
+    </table>
+    </div>
+    </div>
+<form action="/file/sample" method="GET">
+</form>
+<% } %>
+
