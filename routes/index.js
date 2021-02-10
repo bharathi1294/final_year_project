@@ -116,7 +116,7 @@ router.get('/delete',async (req,res)=>{
 const parseCsv = (csv_filename)=>{
   try{
   fs.createReadStream('./public/uploads/'+csv_filename)
-        .pipe(csv({ separator: ',',from_line:2}))
+        .pipe(csv({ separator: ',',from_line:2,trim:true}))
         .on('headers', (headers) => {
             header = headers.map(obj => obj);
           })
