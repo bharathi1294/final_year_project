@@ -23,7 +23,7 @@ router.get('/dash',ensureAuthenticated,(re,res)=>{
   row_count = 0
   results.length = 0
   download_file = ''
-  res.redirect('/dashboard')
+  res.redirect('/file/df_empty')
 })
 
 // Dashboard

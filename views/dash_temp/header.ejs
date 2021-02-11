@@ -51,6 +51,9 @@
       #table-wrapper {
       position:relative;
       }
+      #table-wrapper-1 {
+        position:relative;
+        }
       #table-scroll {
       height:750px;
       overflow:auto;  
@@ -58,9 +61,13 @@
       }
       #table-scroll-1{
         height:450px;
+        width: 50%;
         overflow:auto;  
         margin-top:20px;
         }
+      #table-wrapper-1 table {
+          width:100%;
+      }
       #table-wrapper table {
       width:100%;
       
@@ -73,6 +80,17 @@
       width:35%;
       border:1px solid red;
       }
+      #table-wrapper-1 table thead th .text {
+        position:absolute;   
+        top:-20px;
+        z-index:2;
+        height:20px;
+        width:35%;
+        border:1px solid red;
+        }
+      #table1, #table2, #table3, #table4 {
+        display: none;
+    }
   </style>
 </head>
 <body>

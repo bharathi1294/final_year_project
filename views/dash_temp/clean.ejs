@@ -1,25 +1,124 @@
 <%if(columns.length >0){%>
+<% include ../login_temp/partials/messages %>
+<table>
+    <tr>
+        <button class="btn btn-info" onclick="show(1);">Overview</button>
+        <button class="btn btn-info" onclick="show(2);">Change Datatypes</button>
+        <button class="btn btn-info" onclick="show(3)">Fill Missing values</button>
+    </tr>
+</table> 
+<div id="table1">
+                
+                    <div id="table-wrapper-1">
+                        <div id="table-scroll-1">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <th>Column name</th>
+                                <th>Data types</th>
+                                <th>Null values</th>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0;i<columns.length;i++){ %>
+                                    <tr>
+                                    <td><%=columns[i]%> </td>
+                                    <td><%=datatypes[i]%> </td>
+                                    <td><%=missing_values[i]%> </td>
+                                    <% } %>
+                                </tr>  
+                            </tbody>
+                        </table>
+                        </div>
+                        </div>
+            
+</div><br>
+<div id="table2">
+    <form action="/file/change_datatype" method="POST">
+    <div class="col-xs-3">
+    <label>Enter the column name: </label>
+     <input class="form-control" type="text" data-style="btn-info" name="column_datatype"><br>
+     <label>Select Datatype: </label>
+     <select class="form-control" data-style="btn-info" name="selectpicker">
+            <option name="d_1" value="int32">int</option>
+            <option name="d_2" value="float32">float</option>
+            <option name="d_3" value="string">String</option>
+    </select><br>
+     <button class="btn btn-info">Change</button>
+    </div>
+    </form>
+</div>
+
+<div id="table3">
+
+    <form action="/file/df_fill" method="POST">
+        <div class="col-xs-3">
+        <label>Enter the column name: </label>
+         <input class="form-control" type="text" data-style="btn-info" name="column_datatype"><br>
+         <label>Fill value By: </label>
+         <select class="form-control" data-style="btn-info" name="selectpicker" onchange="yesnoCheck(this);">
+                <option name=" " value=" ">Select value</option>
+                <option name="d_1" value="mean">Mean</option>
+                <option name="d_2" value="meadian">Meadian</option>
+                <option name="d_3" value="frequent">Frequent</option>
+                <option name="d_3" value="replace">Replace</option>
+        </select><br>
+        <div id="ifYes" style="display: none;">
+            <label>Select axis:</label>
+            <p>0-row 1-column (if select 0,row must be in same datatype)</p>
+            <input class="form-control" type="text" id="axis" name="d_axis" data-style="btn-info"/>
+        </div><br>
+         <button class="btn btn-info">Change</button>
+        </div>
+        </form>
+
+
+</div>
+
+
+
+<div id="table4"> Content of 4 </div>
+
+
 <div id="table-wrapper">
-    <div id="table-scroll-1">
+    <div id="table-scroll">
     <table class="table table-striped table-hover">
-        <thead>
-            <th>Column name</th>
-            <th>Data types</th>
-            <th>Null values</th>
-        </thead>
-        <tbody>
-            <% for(var i=0;i<columns.length;i++){ %>
-                <tr>
-                <td><%=columns[i]%> </td>
-                <td><%=datatypes[i]%> </td>
-                <td><%=missing_values[i]%> </td>
-                <% } %>
-            </tr>  
-        </tbody>
-    </table>
-    </div>
-    </div>
-<form action="/file/sample" method="GET">
-</form>
+        <tr>
+        <% for(var i=0;i<columns.length;i++){%>
+            <th><%= columns[i] %></th> 
+        <% } %>
+        </tr> 
+    </thead>
+    <tbody>
+        <% for(var i=0;i<data.length;i++){%>
+            <tr>
+            <% for(var j=0;j< data[i].length;j++) {%>
+                <td><%= data[i][j] %> </td>
+            <% } %>
+            </tr>
+        <% } %>  
+    </tbody>
+</table>
+</div>
+</div>     
+
+
+
 <% } %>
+<script>
+
+    function yesnoCheck(that) {
+        if (that.value == "meadian" || that.value == 'mean') {
+            document.getElementById("ifYes").style.display = "block";
+        } else {
+            document.getElementById("ifYes").style.display = "none";
+        }
+    }
+
+    function show(nr) {
+        document.getElementById("table1").style.display="none";
+        document.getElementById("table2").style.display="none";
+        document.getElementById("table3").style.display="none";
+        document.getElementById("table4").style.display="none";
+        document.getElementById("table"+nr).style.display="block";
+    }
+</script>
 

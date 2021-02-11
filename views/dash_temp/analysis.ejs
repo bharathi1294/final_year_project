@@ -32,7 +32,7 @@
               <h4>No file selected!</h4>
             <% } %>
             <p><a href="/dashboard">Select/Change file</a></p>
-            <% include ../login_temp/partials/messages %>
+            
             <% if(filename.length != 0){%> 
             <form action="/file/clean" method="POST">
                 <input type="hidden" name="filename" value="<%=filename%>">
