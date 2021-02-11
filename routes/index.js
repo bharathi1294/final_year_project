@@ -132,7 +132,7 @@ const parseCsv = (csv_filename)=>{
 }
 
 router.get('/analysis',ensureAuthenticated,(req,res)=>{
-  res.render('dash_temp/analysis',{filename:download_file,columns:[]})
+  res.render('dash_temp/analysis',{filename:download_file,columns:[],view:true})
 })
 
 module.exports = router;

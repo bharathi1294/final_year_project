@@ -20,8 +20,9 @@ router.get('/clean',ensureAuthenticated,(req,res)=>{
   res.render('dash_temp/analysis',{filename:filename,
     columns:user_df.columns,
     datatypes:user_df.ctypes.data,
-    data:user_df.head(40).data,
-    missing_values:user_df.isna().sum().data})
+    data:user_df.head(100).data,
+    missing_values:user_df.isna().sum().data,
+    view:false})
 })
 
 
@@ -35,8 +36,9 @@ router.post('/clean',ensureAuthenticated, async (req,res)=>{
       res.render('dash_temp/analysis',{filename:req.body.filename,
         columns:df.columns,
         datatypes:df.ctypes.data,
-        data:df.head(40).data,
-        missing_values:df.isna().sum().data})
+        data:df.head(100).data,
+        missing_values:df.isna().sum().data,
+        view:false})
         user_df = df.copy()
   }).catch(err=>{
       console.log(err)
@@ -60,16 +62,64 @@ router.post('/change_datatype',ensureAuthenticated,async(req,res)=>{
 })
 
 
-router.post('/df_fill',ensureAuthenticated,(req,res)=>{
+router.post('/df_fill',ensureAuthenticated,async(req,res)=>{
   var c_name = req.body.column_datatype
   var c_option = req.body.selectpicker
   var r_value = req.body.replace
+  try{
   if(c_option == 'mean'){
-    user_df.fillna({columns:[c_name],values:[user_df[c_name].mean(axis=r_value)],inplace:true})
+    if(user_df[c_name].isna().sum() > 0){
+        user_df.fillna({columns:[c_name],values:[user_df[c_name].mean(axis=r_value)],inplace:true})
+        req.flash("success_msg",c_name+" column is changed with mean!")
+    }else{
+        req.flash("error_msg","No null values are found!")
+    }
+  }else if(c_option == 'meadian'){
+    if(user_df[c_name].isna().sum() > 0){
+        user_df.fillna({columns:[c_name],values:[user_df[c_name].median(axis=r_value)],inplace:true})
+        req.flash("success_msg",c_name+" column is changed with median!")
+  }else{
+        req.flash("error_msg","No null values are found!")
+}
+  }else if(c_option == 'frequent'){
+    if(user_df[c_name].isna().sum() > 0){
+        user_df.fillna({columns:[c_name],values:[user_df[c_name].value_counts().max()],inplace:true})
+        req.flash("success_msg",c_name+" column is changed with frequent!")
+  }else{
+      req.flash("error_msg","No null values are found!")
+}
   }
-  req.flash("success_msg","Column value is changed!")
+  else if(c_option == 'fill_0'){
+    if(user_df[c_name].isna().sum() > 0){
+        user_df.fillna({columns:[c_name],values:[0],inplace:true})
+        req.flash("success_msg",c_name+" column is changed with zeros!")
+      }else{
+        req.flash("error_msg","No null values are found!")
+      }
+  }else if(c_option == 'drop_01'){
+    if(r_value == 1){
+        user_df.drop({columns:[c_name], axis:r_value,inplace:true})
+        req.flash("success_msg",c_name+" column is dropped!")
+    }else{
+      var arr = user_df[c_name].isna().data
+      const indices = arr.reduce(
+        (out, bool, index) => bool ? out.concat(index) : out, 
+        []
+      )
+      user_df.drop({index:indices, axis: r_value, inplace: true })
+      req.flash("success_msg",indices.length +" rows is dropped!")
+    }
+    
+  }
   res.redirect("/file/clean")
+  
+
+}catch(e){
+  req.flash("error_msg","Check column name and datatype!")
+  res.redirect("/file/clean")
+}
 })
+
 
 
 

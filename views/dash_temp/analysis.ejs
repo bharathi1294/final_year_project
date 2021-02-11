@@ -36,7 +36,11 @@
             <% if(filename.length != 0){%> 
             <form action="/file/clean" method="POST">
                 <input type="hidden" name="filename" value="<%=filename%>">
-                <button class="btn btn-success">View</button>
+                <% if(view){%> 
+                <button class="btn btn-success">View data</button>
+                <% }else{ %>
+                  <button class="btn btn-success">Original data</button>
+                  <% } %> 
             </form>
             <% } %> 
             <%  include clean %> 

@@ -4,7 +4,7 @@
     <tr>
         <button class="btn btn-info" onclick="show(1);">Overview</button>
         <button class="btn btn-info" onclick="show(2);">Change Datatypes</button>
-        <button class="btn btn-info" onclick="show(3)">Fill Missing values</button>
+        <button class="btn btn-info" onclick="show(3)">Handle Missing values</button>
     </tr>
 </table> 
 <div id="table1">
@@ -59,12 +59,13 @@
                 <option name="d_1" value="mean">Mean</option>
                 <option name="d_2" value="meadian">Meadian</option>
                 <option name="d_3" value="frequent">Frequent</option>
-                <option name="d_3" value="replace">Replace</option>
+                <option name="d_3" value="fill_0">Fill with zeros</option>
+                <option name="d_3" value="drop_01">Drop</option>
         </select><br>
         <div id="ifYes" style="display: none;">
             <label>Select axis:</label>
-            <p>0-row 1-column (if select 0,row must be in same datatype)</p>
-            <input class="form-control" type="text" id="axis" name="d_axis" data-style="btn-info"/>
+            <p>0-row 1-column</p>
+            <input class="form-control" type="text" id="replace" name="replace" data-style="btn-info"/>
         </div><br>
          <button class="btn btn-info">Change</button>
         </div>
@@ -75,8 +76,10 @@
 
 
 
-<div id="table4"> Content of 4 </div>
+<div id="table4">
 
+
+</div><br>
 
 <div id="table-wrapper">
     <div id="table-scroll">
@@ -106,7 +109,7 @@
 <script>
 
     function yesnoCheck(that) {
-        if (that.value == "meadian" || that.value == 'mean') {
+        if (that.value == "meadian" || that.value == 'mean' || that.value == 'drop_01') {
             document.getElementById("ifYes").style.display = "block";
         } else {
             document.getElementById("ifYes").style.display = "none";
