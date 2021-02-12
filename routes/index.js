@@ -135,4 +135,9 @@ router.get('/analysis',ensureAuthenticated,(req,res)=>{
   res.render('dash_temp/analysis',{filename:download_file,columns:[],view:true})
 })
 
+
+router.get('/modal',ensureAuthenticated,(req,res)=>{
+  
+})
+
 module.exports = router;

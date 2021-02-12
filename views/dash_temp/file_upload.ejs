@@ -68,12 +68,19 @@
     </div> 
     <%if (header.length >0){ %>
     <h4><%= c_filename %></h4>
-    <form action="/download" method="GET">
-      <button class="btn btn-success" style="float: right;">Download</button>
+    <table style="float: right;">
+      <tr>
+    <form action="/analysis" method="GET">
+      <button class="btn btn-info" style="float: left;">Analyze</button>
     </form>
     <form action="/delete" method="GET">
-      <button class="btn btn-danger" style="float:left;">Drop</button>
+      <button class="btn btn-danger" style="float:right;">Drop</button>
+    </form>
+    <form action="/download" method="GET">
+      <button class="btn btn-success" style="float: right;">Download</button>
     </form><br><br>
+    </tr>
+    </table>
     <% } %>
 	<div id="table-wrapper">
 	<div id="table-scroll">

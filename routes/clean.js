@@ -22,6 +22,7 @@ router.get('/clean',ensureAuthenticated,(req,res)=>{
     datatypes:user_df.ctypes.data,
     data:user_df.head(100).data,
     missing_values:user_df.isna().sum().data,
+    unique_values:user_df.nunique().data,
     view:false})
 })
 
@@ -38,6 +39,7 @@ router.post('/clean',ensureAuthenticated, async (req,res)=>{
         datatypes:df.ctypes.data,
         data:df.head(100).data,
         missing_values:df.isna().sum().data,
+        unique_values:df.nunique().data,
         view:false})
         user_df = df.copy()
   }).catch(err=>{
@@ -118,6 +120,27 @@ router.post('/df_fill',ensureAuthenticated,async(req,res)=>{
   req.flash("error_msg","Check column name and datatype!")
   res.redirect("/file/clean")
 }
+})
+
+router.post('/df_normal',ensureAuthenticated,(req,res)=>{
+    var column_name = req.body.column_label
+    let encoder = new dfd.LabelEncoder()
+    let cols = [column_name]
+    cols.forEach(col => {
+      encoder.fit(user_df[col])
+      enc_val = encoder.transform(user_df[col])
+      user_df.addColumn({ column: col, value: enc_val })
+    })
+    res.redirect('/file/clean')
+
+})
+
+router.get("/df_download",ensureAuthenticated,(req,res)=>{
+  user_df.to_csv("./public/uploads/output.csv").then((csv) => {
+    res.download('./public/uploads/output.csv')
+}).catch((err) => {
+    console.log(err);
+})
 })
 
 
