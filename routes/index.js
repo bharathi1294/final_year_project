@@ -30,6 +30,7 @@ router.get('/dash',ensureAuthenticated,(re,res)=>{
 router.get('/dashboard', ensureAuthenticated,async(req, res)=>{
   var files = await file_db.find({userId:req.user._id}).sort({$natural:-1})
   res.render('dash_temp/dashboard', {
+    title:"Dashboard",
     user: req.user,
     header:header,
     data:results.slice(0,400),
@@ -132,12 +133,8 @@ const parseCsv = (csv_filename)=>{
 }
 
 router.get('/analysis',ensureAuthenticated,(req,res)=>{
-  res.render('dash_temp/analysis',{filename:download_file,columns:[],view:true})
+  res.render('dash_temp/analysis',{title:"Analysis",filename:download_file,columns:[],view:true})
 })
 
-
-router.get('/modal',ensureAuthenticated,(req,res)=>{
-  
-})
 
 module.exports = router;

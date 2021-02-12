@@ -3,7 +3,7 @@ const router = express.Router();
 const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 const dfd = require('danfojs-node')
 const csv = require('csvtojson')
-
+const file_db = require('../models/files')
 
 var user_df = ''
 var i = 0
@@ -17,7 +17,9 @@ router.get('/df_empty',ensureAuthenticated,(req,res)=>{
 })
 
 router.get('/clean',ensureAuthenticated,(req,res)=>{
-  res.render('dash_temp/analysis',{filename:filename,
+  res.render('dash_temp/analysis',{
+    title:"Analysis",
+    filename:filename,
     columns:user_df.columns,
     datatypes:user_df.ctypes.data,
     data:user_df.head(100).data,
@@ -34,7 +36,9 @@ router.post('/clean',ensureAuthenticated, async (req,res)=>{
     if(i!=0){
       df=user_df
     }
-      res.render('dash_temp/analysis',{filename:req.body.filename,
+      res.render('dash_temp/analysis',{
+        title:"Analysis",
+        filename:req.body.filename,
         columns:df.columns,
         datatypes:df.ctypes.data,
         data:df.head(100).data,
@@ -137,7 +141,12 @@ router.post('/df_normal',ensureAuthenticated,(req,res)=>{
 
 router.get("/df_download",ensureAuthenticated,(req,res)=>{
   user_df.to_csv("./public/uploads/output.csv").then((csv) => {
-    res.download('./public/uploads/output.csv')
+    const file = new file_db({
+      filename:"output.csv",
+      userId:req.user._id
+  })
+    const newFile = file.save();
+    res.redirect('/file/clean')
 }).catch((err) => {
     console.log(err);
 })
