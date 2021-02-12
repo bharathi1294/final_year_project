@@ -5,7 +5,9 @@
         <button class="btn btn-info" onclick="show(1);">Overview</button>
         <button class="btn btn-info" onclick="show(2);">Change Datatypes</button>
         <button class="btn btn-info" onclick="show(3)">Handle Missing values</button>
-        <button class="btn btn-info" onclick="show(4)">Data Normalization</button>
+        <button class="btn btn-info" onclick="show(4)">Data Encoder</button>
+        <button class="btn btn-info" onclick="show(5)">Advance</button>
+
     </tr>
 </table> 
 <div id="table1">
@@ -36,6 +38,7 @@
 </div><br>
 <div id="table2">
     <form action="/file/change_datatype" method="POST">
+        <p>*string datatype column contains numeric values!</p>
     <div class="col-xs-3">
     <label>Enter the column name: </label>
      <input class="form-control" type="text" data-style="btn-info" name="column_datatype"><br>
@@ -53,14 +56,16 @@
 <div id="table3">
 
     <form action="/file/df_fill" method="POST">
+        <p>Replace all NaN value with specified value</p>
         <div class="col-xs-3">
         <label>Enter the column name: </label>
          <input class="form-control" type="text" data-style="btn-info" name="column_datatype"><br>
          <label>Fill value By: </label>
          <select class="form-control" data-style="btn-info" name="selectpicker" onchange="yesnoCheck(this);">
-                <option name=" " value=" ">Select value</option>
                 <option name="d_1" value="mean">Mean</option>
-                <option name="d_2" value="meadian">Meadian</option>
+                <option name="d_2" value="median">Median</option>
+                <option name="d_3" value="min">Min</option>
+                <option name="d_4" value="max">Max</option>
                 <option name="d_3" value="frequent">Frequent</option>
                 <option name="d_3" value="fill_0">Fill with zeros</option>
                 <option name="d_3" value="drop_01">Drop</option>
@@ -81,14 +86,35 @@
 
 <div id="table4">
     <form action="/file/df_normal" method="POST">
+        <p>This is mostly used as a preprocessing step before most machine learning tasks for category columns</p>
         <div class="col-xs-3">
             <label>Enter the column name: </label>
             <input class="form-control" type="text" data-style="btn-info" name="column_label"><br>
             <p>Example - if you have gender column : 0-Male, 1-Female</p>
+            <label>Select Encoder type: </label>
+     <select class="form-control" data-style="btn-info" name="selectpicker">
+            <option name="d_1" value="label_encode">LabelEncoder</option>
+            <option name="d_2" value="one_encode">OneHotEncoder</option>
+    </select><br>
         </div><br>
         <button class="btn btn-info">Change</button>
     </form>
 </div><br>
+
+<div id="table5">
+    <form action="/file/df_advance" method="POST">
+        <label>Enter the column name: </label>
+        <input class="form-control" type="text" data-style="btn-info" name="column_name"><br>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea3">Type your funtion:</label>
+            <pre><textarea class="form-control" id="exampleFormControlTextarea3" rows="7" name="code_editor">//Example &#10; function lower(x){&#10;  return x.toLowerCase() &#10; }
+            </textarea></pre>
+          </div>
+        <br> 
+    <button class="btn btn-info">Apply</button>
+    </form>
+</div>
+
 <form action="/file/df_download" method="GET">
     <button class="btn btn-success" style="float: right;">Save</button>
   </form><br>
@@ -118,9 +144,8 @@
 
 <% } %>
 <script>
-
     function yesnoCheck(that) {
-        if (that.value == "meadian" || that.value == 'mean' || that.value == 'drop_01') {
+        if (that.value == "median" || that.value == 'mean' || that.value == 'drop_01' || that.value == 'min' || that.value == 'max') {
             document.getElementById("ifYes").style.display = "block";
         } else {
             document.getElementById("ifYes").style.display = "none";
@@ -132,7 +157,12 @@
         document.getElementById("table2").style.display="none";
         document.getElementById("table3").style.display="none";
         document.getElementById("table4").style.display="none";
+        document.getElementById("table5").style.display="none";
         document.getElementById("table"+nr).style.display="block";
     }
+    CodeMirror.fromTextArea(document.querySelector('#my-js'), {
+        tabSize: 2,
+        value: 'console.log("Hello, World");',
+        mode: 'javascript'
+      });
 </script>
-

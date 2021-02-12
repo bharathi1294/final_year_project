@@ -73,6 +73,7 @@ router.post('/df_fill',ensureAuthenticated,async(req,res)=>{
   var c_option = req.body.selectpicker
   var r_value = req.body.replace
   try{
+    //Mean
   if(c_option == 'mean'){
     if(user_df[c_name].isna().sum() > 0){
         user_df.fillna({columns:[c_name],values:[user_df[c_name].mean(axis=r_value)],inplace:true})
@@ -80,14 +81,24 @@ router.post('/df_fill',ensureAuthenticated,async(req,res)=>{
     }else{
         req.flash("error_msg","No null values are found!")
     }
-  }else if(c_option == 'meadian'){
+  }
+  //Median
+  else if(c_option == 'meadian'){
     if(user_df[c_name].isna().sum() > 0){
-        user_df.fillna({columns:[c_name],values:[user_df[c_name].median(axis=r_value)],inplace:true})
+      if(r_value == 0){
+        user_df.fillna({columns:[c_name],values:[user_df[c_name].median(axis=0)],inplace:true})
+      }
+      else{
+        user_df.fillna({columns:[c_name],values:[user_df[c_name].median()],inplace:true})
+        console.log(user_df[c_name].median())
+      }
         req.flash("success_msg",c_name+" column is changed with median!")
   }else{
         req.flash("error_msg","No null values are found!")
 }
-  }else if(c_option == 'frequent'){
+  }
+  //Frequent
+  else if(c_option == 'frequent'){
     if(user_df[c_name].isna().sum() > 0){
         user_df.fillna({columns:[c_name],values:[user_df[c_name].value_counts().max()],inplace:true})
         req.flash("success_msg",c_name+" column is changed with frequent!")
@@ -95,6 +106,7 @@ router.post('/df_fill',ensureAuthenticated,async(req,res)=>{
       req.flash("error_msg","No null values are found!")
 }
   }
+  //Fill with zeros
   else if(c_option == 'fill_0'){
     if(user_df[c_name].isna().sum() > 0){
         user_df.fillna({columns:[c_name],values:[0],inplace:true})
@@ -102,7 +114,9 @@ router.post('/df_fill',ensureAuthenticated,async(req,res)=>{
       }else{
         req.flash("error_msg","No null values are found!")
       }
-  }else if(c_option == 'drop_01'){
+  }
+  //Drop
+  else if(c_option == 'drop_01'){
     if(r_value == 1){
         user_df.drop({columns:[c_name], axis:r_value,inplace:true})
         req.flash("success_msg",c_name+" column is dropped!")
@@ -114,8 +128,25 @@ router.post('/df_fill',ensureAuthenticated,async(req,res)=>{
       )
       user_df.drop({index:indices, axis: r_value, inplace: true })
       req.flash("success_msg",indices.length +" rows is dropped!")
+    } 
+  }
+  //Min
+  else if(c_option == 'min'){
+    if(user_df[c_name].isna().sum() > 0){
+      user_df.fillna({columns:[c_name],values:[user_df[c_name].min(axis=r_value)],inplace:true})
+      req.flash("success_msg",c_name+" column is changed with min!")
+    }else{
+      req.flash("error_msg","No null values are found!")
     }
-    
+  }
+  //Max
+  else if(c_option == 'max'){
+    if(user_df[c_name].isna().sum() > 0){
+      user_df.fillna({columns:[c_name],values:[user_df[c_name].max(axis=r_value)],inplace:true})
+      req.flash("success_msg",c_name+" column is changed with max!")
+    }else{
+      req.flash("error_msg","No null values are found!")
+    }
   }
   res.redirect("/file/clean")
   
@@ -126,26 +157,54 @@ router.post('/df_fill',ensureAuthenticated,async(req,res)=>{
 }
 })
 
-router.post('/df_normal',ensureAuthenticated,(req,res)=>{
+router.post('/df_normal',ensureAuthenticated,async(req,res)=>{
     var column_name = req.body.column_label
+    var e_option = req.body.selectpicker
+    try{
     let encoder = new dfd.LabelEncoder()
     let cols = [column_name]
+    if(e_option == 'one_encode'){
+      var d_data = user_df[column_name].data
+      let dum_df = dfd.get_dummies({data: d_data, prefix:column_name})
+      user_df.drop({columns:[column_name], axis:1,inplace:true})
+      user_df = dfd.concat({df_list: [user_df, dum_df], axis: 1})
+    }else{
     cols.forEach(col => {
       encoder.fit(user_df[col])
       enc_val = encoder.transform(user_df[col])
       user_df.addColumn({ column: col, value: enc_val })
     })
+  }
+    req.flash("success_msg","Category columns changed to numeric columns!")
     res.redirect('/file/clean')
+}catch(e){
+  req.flash("error_msg","Check column name and datatype!")
+  res.redirect('/file/clean')
+}
 
 })
 
+//code
+
+router.post('/df_advance',ensureAuthenticated,(req,res)=>{
+  var col_name = req.body.column_name
+  var code = req.body.code_editor
+  code = code.replace(/\s+$/,'')
+  func_name = eval('('+code+')')
+  user_df[col_name] = user_df[col_name].data.map(eval('('+code+')'))
+  res.redirect('/file/clean')
+  
+})
+
 router.get("/df_download",ensureAuthenticated,(req,res)=>{
-  user_df.to_csv("./public/uploads/output.csv").then((csv) => {
+  var new_file = filename.split(".")[0]+"-output.csv"
+  user_df.to_csv("./public/uploads/"+new_file).then((csv) => {
     const file = new file_db({
-      filename:"output.csv",
+      filename:new_file,
       userId:req.user._id
   })
     const newFile = file.save();
+    req.flash("success_msg","Your file has been saved and view your file on dashboard!")
     res.redirect('/file/clean')
 }).catch((err) => {
     console.log(err);
