@@ -186,31 +186,47 @@ router.post('/df_normal',ensureAuthenticated,async(req,res)=>{
 
 //code
 
-router.post('/df_advance',ensureAuthenticated,(req,res)=>{
+router.post('/df_advance',ensureAuthenticated,async(req,res)=>{
+try{
   var col_name = req.body.column_name
   var code = req.body.code_editor
   code = code.replace(/\s+$/,'')
   func_name = eval('('+code+')')
   user_df[col_name] = user_df[col_name].data.map(eval('('+code+')'))
+  req.flash("success_msg","Your data has been modified!")
   res.redirect('/file/clean')
+}catch(e){
+  req.flash("error_msg","Check your code and column datatype!")
+  res.redirect('/file/clean')
+}
   
 })
 
 router.get("/df_download",ensureAuthenticated,(req,res)=>{
-  var new_file = filename.split(".")[0]+"-output.csv"
-  user_df.to_csv("./public/uploads/"+new_file).then((csv) => {
-    const file = new file_db({
-      filename:new_file,
-      userId:req.user._id
-  })
-    const newFile = file.save();
-    req.flash("success_msg","Your file has been saved and view your file on dashboard!")
+  user_df.to_csv("./public/uploads/"+filename).then((csv) => {
+    req.flash('success_msg',"Changes made in current file!")
     res.redirect('/file/clean')
-}).catch((err) => {
+  }).catch((err) => {
     console.log(err);
+    res.redirect('/file/clean')
 })
 })
 
+router.get("/df_save_new",ensureAuthenticated,(req,res)=>{
+  var new_name = filename.split("-")[0]+"_new.csv"
+  user_df.to_csv("./public/uploads/"+new_name).then((csv) => {
+    const file = new file_db({
+      filename:new_name,
+      userId:req.user._id
+  })
+  const newFile = file.save();
+  req.flash('success_msg',"Your file has been saved view in dashboard!")
+  res.redirect('/file/clean')
+  }).catch((err) => {
+    console.log(err);
+    res.redirect('/file/clean')
+})
+})
 
 
 

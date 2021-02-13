@@ -115,9 +115,20 @@
     </form>
 </div>
 
-<form action="/file/df_download" method="GET">
-    <button class="btn btn-success" style="float: right;">Save</button>
-  </form><br>
+
+<table style="float: right;">
+    <tr>
+    <form action="/file/df_download" method="GET">
+        <button class="btn btn-success" style="float: right;">Overwrite</button>      
+    </form>
+    <form action="/file/df_save_new">
+    <button class="btn btn-success" style="float: right;" value="save_new">Save as Newfile</button>
+    </form>
+    </tr><br>
+</table>
+    <br>
+
+
 <div id="table-wrapper">
     <div id="table-scroll">
     <table class="table table-striped table-hover">
@@ -151,7 +162,9 @@
             document.getElementById("ifYes").style.display = "none";
         }
     }
-
+    function open_new(){
+        document.getElementById("ifOpen").style.display = "block";
+    }
     function show(nr) {
         document.getElementById("table1").style.display="none";
         document.getElementById("table2").style.display="none";
