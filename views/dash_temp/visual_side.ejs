@@ -1,0 +1,32 @@
+<% if(filename.length > 0){%> 
+<form action="" method="POST">
+        <label>Select Chart Type:</label>
+        <select class="form-control" data-style="btn-info" id="ddlViewBy">
+            <option name="" value="always">Select chart to view</option>
+            <option name="c_1" value="bar">Bar Chart</option>
+        </select><br>
+        <label>Enter column name:</label><br>
+            <input class="form-control" type="text" name="bar_c_name" id="bar_c_id">
+        <button class="btn btn-info">Show</button>
+</form>
+    <div id="bar_chart" style="width: 500px; height: 350px;"></div>
+
+<% } %> 
+<script>
+    const Form = document.querySelector('form')
+    const select = document.querySelector('#ddlViewBy')
+    const c_name = document.querySelector("#bar_c_id")
+    console.log(c_name.value)
+    Form.addEventListener('submit',(e)=>{
+        e.preventDefault()
+        const d_s = select.value
+        fetch('http://localhost:5000/file/bar_c/gender').then((response)=>{
+            if (!response.ok) {
+                throw 'Error';
+            }
+            response.json().then((data)=>{
+            console.log(data)
+        })
+        })
+    })
+</script>

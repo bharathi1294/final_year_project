@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
+const cors = require("cors")
 
 const app = express();
 
@@ -25,6 +26,7 @@ mongoose
 app.set('view engine', 'ejs');
 
 // Express body parser
+app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 app.use(express.static(__dirname + '/public'));

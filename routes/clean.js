@@ -228,7 +228,17 @@ router.get("/df_save_new",ensureAuthenticated,(req,res)=>{
 })
 })
 
+//Graph Part
 
+router.get('/chart',ensureAuthenticated,(req,res)=>{
+  res.render('dash_temp/visual_main',{title:"Visualization",filename:filename})
+})
 
+router.get('/bar_c/:gc_name',(req,res)=>{
+  var g_c_name = req.params.gc_name
+  x_data = user_df[g_c_name].value_counts().index_arr
+  y_data = user_df[g_c_name].value_counts().data
+  res.send({x:x_data,y:y_data})
+})
 
 module.exports = router

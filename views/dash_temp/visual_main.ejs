@@ -1,0 +1,39 @@
+<% include header %>
+<div class="wrapper ">
+    <div class="main-panel">
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+        <div class="container-fluid">
+          <div class="navbar-wrapper">
+            <a class="navbar-brand" href="javascript:;">Visualization</a>
+          </div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+            <span class="navbar-toggler-icon icon-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a href="/users/logout" class="btn btn-danger">Logout</a>
+              </li>
+              <!-- your navbar here -->
+            </ul>
+        </div>
+        </div>
+      </nav>
+      <div class="content">
+        <div class="container-fluid">
+          <p>Selected CSV file: </p>
+          <% if(filename.length != 0){%> 
+          <h4><%= filename %> </h4>
+          <% }else{ %>
+          <h4>No file selected!</h4>
+        <% } %>
+        <p><a href="/dashboard">Select/Change file</a></p>
+          <% include visual_side %> 
+        </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/2.2.7/echarts-all.js"></script>
+<% include footer %>

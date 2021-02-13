@@ -34,6 +34,9 @@
             <p><a href="/dashboard">Select/Change file</a></p>
             
             <% if(filename.length != 0){%>
+              <form action="/file/rest_file" method="POST">
+                <input type="hidden" name="file_api" value="<%=filename%>"> 
+              </form>
             <form action="/file/clean" method="POST">
                 <input type="hidden" name="filename" value="<%=filename%>">
                 <% if(view){%> 
