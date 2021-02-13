@@ -234,7 +234,7 @@ router.get('/chart',ensureAuthenticated,(req,res)=>{
   res.render('dash_temp/visual_main',{title:"Visualization",filename:filename})
 })
 
-router.get('/bar_c/:gc_name',(req,res)=>{
+router.get('/bar_c/:gc_name',ensureAuthenticated,(req,res)=>{
   var g_c_name = req.params.gc_name
   x_data = user_df[g_c_name].value_counts().index_arr
   y_data = user_df[g_c_name].value_counts().data
