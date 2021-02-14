@@ -32,7 +32,10 @@
           <h4>No file selected!</h4>
         <% } %>
         <p><a href="/dashboard">Select/Change file</a></p>
-          <% include visual_side %> 
+        <% if(filename.length != 0){%>
+          <p><a href=/file/chart/<%=filename%>>Visualization</a></p>
+        <% } %> 
+          <% include visual_side %>
         </div>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/2.2.7/echarts-all.js"></script>

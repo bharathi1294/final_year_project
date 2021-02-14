@@ -136,12 +136,8 @@ router.get('/analysis',ensureAuthenticated,(req,res)=>{
   res.render('dash_temp/analysis',{title:"Analysis",filename:download_file,columns:[],view:true})
 })
 
-router.get('/rest_file',(req,res)=>{
-  res.send({message:download_file})
-})
-
 router.get('/visual',ensureAuthenticated,(req,res)=>{
-  res.render('dash_temp/visual_main',{title:"Visualization",filename:download_file})
+  res.render('dash_temp/visual_main',{title:"Visualization",filename:download_file,dis:false})
 })
 
 

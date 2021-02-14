@@ -8,6 +8,7 @@ const file_db = require('../models/files')
 var user_df = ''
 var i = 0
 var filename = ''
+var graph_df = ''
 
 router.get('/df_empty',ensureAuthenticated,(req,res)=>{
   user_df = ''
@@ -230,15 +231,23 @@ router.get("/df_save_new",ensureAuthenticated,(req,res)=>{
 
 //Graph Part
 
-router.get('/chart',ensureAuthenticated,(req,res)=>{
-  res.render('dash_temp/visual_main',{title:"Visualization",filename:filename})
+router.get('/chart/:filename',ensureAuthenticated,async(req,res)=>{
+  await dfd.read_csv('./public/uploads/'+req.params.filename)
+  .then(df => {
+    graph_df = df.copy()
+  })
+  res.render('dash_temp/visual_main',{title:"Visualization",filename:req.params.filename,dis:true})
 })
 
 router.get('/bar_c/:gc_name',ensureAuthenticated,(req,res)=>{
-  var g_c_name = req.params.gc_name
-  x_data = user_df[g_c_name].value_counts().index_arr
-  y_data = user_df[g_c_name].value_counts().data
-  res.send({x:x_data,y:y_data})
+  try{
+    var g_c_name = req.params.gc_name
+    x_data = graph_df[g_c_name].value_counts().index_arr
+    y_data = graph_df[g_c_name].value_counts().data
+    res.send({title:g_c_name,x:x_data,y:y_data})
+  }catch{
+    req.flash("error_msg","Check your column name")
+  }
 })
 
 module.exports = router
