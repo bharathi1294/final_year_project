@@ -14,6 +14,7 @@ router.get('/df_empty',ensureAuthenticated,(req,res)=>{
   user_df = ''
   i=0
   filename = ''
+  graph_df = ''
   res.redirect('/dashboard')
 })
 
@@ -245,8 +246,20 @@ router.get('/bar_c/:gc_name',ensureAuthenticated,(req,res)=>{
     x_data = graph_df[g_c_name].value_counts().index_arr
     y_data = graph_df[g_c_name].value_counts().data
     res.send({title:g_c_name,x:x_data,y:y_data})
-  }catch{
-    req.flash("error_msg","Check your column name")
+  }catch(e){
+    console.log(e)
+  }
+})
+
+router.get('/line_c/:x/:y',ensureAuthenticated,(req,res)=>{
+  try{
+    var x = req.params.x
+    var y = req.params.y
+    x_data = graph_df[x].data
+    y_data = graph_df[y].data
+    res.send({x_title:x,y_title:y,x:x_data,y:y_data})
+  }catch(e){
+    console.log(e)
   }
 })
 

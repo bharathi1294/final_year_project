@@ -6,13 +6,14 @@
             <option name="" value="always">Select chart to view</option>
             <option name="c_1" value="bar_c">Bar Chart</option>
             <option name="c_1" value="pie_c">Pie Chart</option>
+            <option name="c_2" value="line_c">Scatter Chart</option>
         </select><br>
         <p id="c_exp"></p>
         <label>Enter column name:</label><br>
             <input class="form-control" type="text" name="bar_c_name" id="bar_c_id">
         <button class="btn btn-info">Show</button>
 </form>
-    <div id="chart" style="width: 500px; height: 350px;"></div>
+    <div id="chart" style="width: 700px; height: 450px;"></div>
 
 <% } %> 
 <script>
@@ -42,6 +43,23 @@
                         }
                 })
                 })
+        }else if(d_s == 'line_c'){
+            var str = new String(c_name.value).split(",")
+            fetch('http://localhost:5000/file/line_c/'+str[0]+'/'+str[1]).then((response)=>{
+                if (!response.ok) {
+                    throw 'Error';
+                }
+
+                console.log(d_s)
+                response.json().then((data)=>{
+                    var a = data.x
+                    var b = data.y
+                    var c = a.map(function(e, i) {return [e, b[i]];});
+                    console.log(c)
+                    scatter_chart(data.x_title,data.y_title,c)
+                })
+            })
+        }else{
         }
     })
 
@@ -50,7 +68,7 @@
     		var myChart = echarts.init(chart);
     		var option = {
     			title: {},
-    			tooltip: { },
+    			tooltip: {},
     			legend: { data: [t] },
     			xAxis: { data:x},
     			yAxis: { },
@@ -93,6 +111,27 @@
                 }
             ]
         }
+        myChart.setOption(option);
+    }
+
+    function scatter_chart(x,y,arr){
+        var chart = document.getElementById('chart');
+    	var myChart = echarts.init(chart);
+        var option = {
+            xAxis: {
+                type:"value",
+                name:x
+            },
+            yAxis: {
+                type:"value",
+                name:y
+            },
+            series: [{
+                symbolSize:5,
+                data:arr,
+                type: 'scatter'
+            }]
+        };
         myChart.setOption(option);
     }
 </script>
