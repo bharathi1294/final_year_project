@@ -6,7 +6,9 @@
             <option name="" value="always">Select chart to view</option>
             <option name="c_1" value="bar_c">Bar Chart</option>
             <option name="c_1" value="pie_c">Pie Chart</option>
-            <option name="c_2" value="line_c">Scatter Chart</option>
+            <option name="c_2" value="scar_c">Scatter Chart</option>
+            <option name="c_2" value="line_c">Line Chart</option>
+            <option name="c_1" value="box_c">Box Plot</option>
         </select><br>
         <p id="c_exp"></p>
         <label>Enter column name:</label><br>
@@ -23,7 +25,7 @@
     Form.addEventListener('submit',(e)=>{
         e.preventDefault()
         const d_s = select.value
-        if(d_s == 'bar_c'|| d_s == 'pie_c'){
+        if(d_s == 'bar_c'|| d_s == 'pie_c' || d_s == 'box_c'){
                 fetch('http://localhost:5000/file/bar_c/'+c_name.value).then((response)=>{
                     if (!response.ok) {
                         throw 'Error';
@@ -33,17 +35,19 @@
                     response.json().then((data)=>{
                         if(d_s == 'bar_c'){
                             bar_chart(data.title,data.x,data.y)
-                        }else{
+                        }else if(d_s == 'pie_c'){
                             var arr = []
                             for(var i=0;i<data.x.length;i++){
                                 var item ={value:parseInt(data.y[i]),name:data.x[i]};
                                 arr.push(item);
                             }
                             pie_chart(data.title,data.x,arr)
+                        }else{
+                            box_plot()
                         }
                 })
                 })
-        }else if(d_s == 'line_c'){
+        }else if(d_s == 'line_c' || d_s == 'scar_c'){
             var str = new String(c_name.value).split(",")
             fetch('http://localhost:5000/file/line_c/'+str[0]+'/'+str[1]).then((response)=>{
                 if (!response.ok) {
@@ -52,11 +56,15 @@
 
                 console.log(d_s)
                 response.json().then((data)=>{
+                    if(d_s == 'scar_c'){
                     var a = data.x
                     var b = data.y
                     var c = a.map(function(e, i) {return [e, b[i]];});
                     console.log(c)
                     scatter_chart(data.x_title,data.y_title,c)
+                }else{
+                    line_chart(data.x_title,data.y_title,data.x,data.y)
+                }
                 })
             })
         }else{
@@ -133,5 +141,30 @@
             }]
         };
         myChart.setOption(option);
+    }
+    
+    function line_chart(x_t,y_t,x,y){
+        var chart = document.getElementById('chart');
+    	var myChart = echarts.init(chart);
+        var option = {
+            xAxis: {
+                type: 'category',
+                name:x_t,
+                data:x
+            },
+            yAxis: {
+                name:y_t,
+                type: 'value'
+            },
+            series: [{
+                data:y,
+                type: 'line'
+            }]
+        };
+        myChart.setOption(option);
+    }
+
+    function box_plot(){
+        
     }
 </script>
