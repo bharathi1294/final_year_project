@@ -8,7 +8,6 @@
             <option name="c_1" value="pie_c">Pie Chart</option>
             <option name="c_2" value="scar_c">Scatter Chart</option>
             <option name="c_2" value="line_c">Line Chart</option>
-            <option name="c_1" value="box_c">Box Plot</option>
         </select><br>
         <p id="c_exp"></p>
         <label>Enter column name:</label><br>
@@ -42,8 +41,6 @@
                                 arr.push(item);
                             }
                             pie_chart(data.title,data.x,arr)
-                        }else{
-                            box_plot()
                         }
                 })
                 })
@@ -162,9 +159,5 @@
             }]
         };
         myChart.setOption(option);
-    }
-
-    function box_plot(){
-        
     }
 </script>

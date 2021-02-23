@@ -55,7 +55,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 0,1,Mr. Engelhart Cornelius Ostby,male,65,0,1,61.9792
 1,1,Mr. Hugh Woolner,male,46,0,0,35.5
 1,2,Miss. Emily Rugg,female,21,0,0,10.5
-0,3,Mr. Mansouer Novel,male,28.5,0,0,7.2292
+0,3,Mr. Mansouer Novel,male,29,0,0,7.2292
 1,2,Miss. Constance Mirium West,female,5,1,2,27.75
 0,3,Master. William Frederick Goodwin,male,11,5,2,46.9
 0,3,Mr. Orsen Sirayanian,male,22,0,0,7.2292
@@ -76,7 +76,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 0,3,Mr. Sigurd Hansen Moen,male,25,0,0,7.65
 0,3,Mr. Ivan Staneff,male,23,0,0,7.8958
 0,3,Mr. Rahamin Haim Moutal,male,28,0,0,8.05
-1,2,Master. Alden Gates Caldwell,male,0.83,0,2,29
+1,2,Master. Alden Gates Caldwell,male,1,0,2,29
 1,3,Miss. Elizabeth Dowdell,female,30,0,0,12.475
 0,3,Mr. Achille Waelens,male,22,0,0,9
 1,3,Mr. Jan Baptist Sheerlinck,male,29,0,0,9.5
@@ -109,19 +109,19 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 0,3,Mr. Tido Rekic,male,38,0,0,7.8958
 1,3,Miss. Bertha Moran,female,28,1,0,24.15
 0,1,Mr. Walter Chamberlain Porter,male,47,0,0,52
-0,3,Miss. Hileni Zabour,female,14.5,1,0,14.4542
+0,3,Miss. Hileni Zabour,female,15,1,0,14.4542
 0,3,Mr. David John Barton,male,22,0,0,8.05
 0,3,Miss. Katriina Jussila,female,20,1,0,9.825
 0,3,Miss. Malake Attalah,female,17,0,0,14.4583
 0,3,Mr. Edvard Pekoniemi,male,21,0,0,7.925
-0,3,Mr. Patrick Connors,male,70.5,0,0,7.75
+0,3,Mr. Patrick Connors,male,71,0,0,7.75
 0,2,Mr. William John Robert Turpin,male,29,1,0,21
 0,1,Mr. Quigg Edmond Baxter,male,24,0,1,247.5208
 0,3,Miss. Ellis Anna Maria Andersson,female,2,4,2,31.275
 0,2,Mr. Stanley George Hickman,male,21,2,0,73.5
 0,3,Mr. Leonard Charles Moore,male,19,0,0,8.05
-0,2,Mr. Nicholas Nasser,male,32.5,1,0,30.0708
-1,2,Miss. Susan Webber,female,32.5,0,0,13
+0,2,Mr. Nicholas Nasser,male,33,1,0,30.0708
+1,2,Miss. Susan Webber,female,33,0,0,13
 0,1,Mr. Percival Wayland White,male,54,0,1,77.2875
 1,3,Master. Elias Nicola-Yarred,male,12,1,0,11.2417
 0,3,Mr. Martin McMahon,male,19,0,0,7.75
@@ -146,12 +146,12 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 0,2,Mr. Joseph Charles Nicholls,male,19,1,1,36.75
 1,3,Mr. August Edvard Andersson,male,27,0,0,7.7958
 0,3,Miss. Robina Maggie Ford,female,9,2,2,34.375
-0,2,Mr. Michel Navratil,male,36.5,0,2,26
+0,2,Mr. Michel Navratil,male,37,0,2,26
 0,2,Rev. Thomas Roussel Davids Byles,male,42,0,0,13
 0,2,Rev. Robert James Bateman,male,51,0,0,12.525
 1,1,Mrs. Thomas (Edith Wearne) Pears,female,22,1,0,66.6
-0,3,Mr. Alfonzo Meo,male,55.5,0,0,8.05
-0,3,Mr. Austin Blyler van Billiard,male,40.5,0,2,14.5
+0,3,Mr. Alfonzo Meo,male,56,0,0,8.05
+0,3,Mr. Austin Blyler van Billiard,male,41,0,2,14.5
 0,3,Mr. Ole Martin Olsen,male,27,0,0,7.3125
 0,1,Mr. Charles Duane Williams,male,51,0,1,61.3792
 1,3,Miss. Katherine Gilnagh,female,16,0,0,7.7333
@@ -201,7 +201,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 0,3,Mr. Nestor Cyriel Vande Walle,male,28,0,0,9.5
 0,3,Mr. Frederick Sage,male,17,8,2,69.55
 0,3,Mr. Jakob Alfred Johanson,male,34,0,0,6.4958
-0,3,Mr. Gerious Youseff,male,45.5,0,0,7.225
+0,3,Mr. Gerious Youseff,male,46,0,0,7.225
 1,3,Mr. Gurshon Cohen,male,18,0,0,8.05
 0,3,Miss. Telma Matilda Strom,female,2,0,1,10.4625
 0,3,Mr. Karl Alfred Backstrom,male,32,1,0,15.85
@@ -225,7 +225,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 1,1,Mr. Frederick Maxfield Hoyt,male,38,1,0,90
 0,3,Mr. Karl Ivar Sven Berglund,male,22,0,0,9.35
 1,2,Mr. William John Mellors,male,19,0,0,10.5
-0,3,Mr. John Hall Lovell,male,20.5,0,0,7.25
+0,3,Mr. John Hall Lovell,male,21,0,0,7.25
 0,2,Mr. Arne Jonas Fahlstrom,male,18,0,0,13
 0,3,Miss. Mathilde Lefebre,female,12,3,1,25.4667
 1,1,Mrs. Henry Birkhardt (Irene Wallach) Harris,female,35,1,0,83.475
@@ -293,7 +293,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 0,3,Miss. Aloisia Haas,female,24,0,0,8.85
 0,3,Mr. Ivan Mineff,male,24,0,0,7.8958
 0,1,Mr. Ervin G Lewy,male,30,0,0,27.7208
-0,3,Mr. Mansour Hanna,male,23.5,0,0,7.2292
+0,3,Mr. Mansour Hanna,male,24,0,0,7.2292
 0,1,Miss. Helen Loraine Allison,female,2,1,2,151.55
 1,1,Mr. Adolphe Saalfeld,male,47,0,0,30.5
 1,1,Mrs. James (Helene DeLaudeniere Chaput) Baxter,female,50,0,1,247.5208
@@ -302,7 +302,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 0,3,Mr. William Cahoone Jr Johnson,male,19,0,0,0
 1,2,Miss. Nora A Keane,female,46,0,0,12.35
 0,3,Mr. Howard Hugh Williams,male,28,0,0,8.05
-1,1,Master. Hudson Trevor Allison,male,0.92,1,2,151.55
+1,1,Master. Hudson Trevor Allison,male,1,1,2,151.55
 1,1,Miss. Margaret Fleming,female,42,0,0,110.8833
 1,1,Mrs. Victor de Satode (Maria Josefa Perez de Soto y Vallejo) Penasco y Castellana,female,17,1,0,108.9
 0,2,Mr. Samuel Abelson,male,30,1,0,24
@@ -328,7 +328,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 1,3,Mrs. Frank John (Emily Alice Brown) Goldsmith,female,31,1,1,20.525
 1,1,Miss. Jean Gertrude Hippach,female,16,0,1,57.9792
 1,3,Miss. Agnes McCoy,female,28,2,0,23.25
-0,1,Mr. Austen Partner,male,45.5,0,0,28.5
+0,1,Mr. Austen Partner,male,46,0,0,28.5
 0,1,Mr. George Edward Graham,male,38,0,1,153.4625
 0,3,Mr. Leo Edmondus Vander Planke,male,16,2,0,18
 1,1,Mrs. Henry William (Clara Heinsheimer) Frauenthal,female,42,1,0,133.65
@@ -465,7 +465,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 0,2,Mr. William Campbell,male,21,0,0,0
 0,1,Mr. John Montgomery Smart,male,56,0,0,26.55
 0,3,Mr. James Scanlan,male,22,0,0,7.725
-1,3,Miss. Helene Barbara Baclini,female,0.75,2,1,19.2583
+1,3,Miss. Helene Barbara Baclini,female,1,2,1,19.2583
 0,3,Mr. Arthur Keefe,male,39,0,0,7.25
 0,3,Mr. Luka Cacic,male,38,0,0,8.6625
 1,2,Mrs. Edwy Arthur (Ada Mary Worth) West,female,33,1,2,27.75
@@ -521,7 +521,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 0,3,Mr. Sarkis Lahoud,male,35,0,0,7.225
 1,1,Mrs. Louis Albert (Ida Sophia Fischer) Hippach,female,44,0,1,57.9792
 0,3,Mr. Fared Kassem,male,18,0,0,7.2292
-0,3,Mr. James Farrell,male,40.5,0,0,7.75
+0,3,Mr. James Farrell,male,41,0,0,7.75
 1,2,Miss. Lucy Ridsdale,female,50,0,0,10.5
 0,1,Mr. John Farthing,male,49,0,0,221.7792
 0,3,Mr. Johan Werner Salonen,male,39,0,0,7.925
@@ -640,7 +640,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 1,1,Mlle. Emma Sagesser,female,24,0,0,69.3
 0,3,Miss. Margit Elizabeth Skoog,female,2,3,2,27.9
 1,3,Mr. Choong Foo,male,32,0,0,56.4958
-1,3,Miss. Eugenie Baclini,female,0.75,2,1,19.2583
+1,3,Miss. Eugenie Baclini,female,1,2,1,19.2583
 1,1,Mr. Henry Sleeper Harper,male,48,1,0,76.7292
 0,3,Mr. Liudevit Cor,male,19,0,0,7.8958
 1,1,Col. Oberst Alfons Simonius-Blumer,male,56,0,0,35.5
@@ -672,7 +672,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 1,2,Mr. Charles Wilhelms,male,31,0,0,13
 0,2,Mr. Ennis Hastings Watson,male,19,0,0,0
 0,3,Mr. Gustaf Hjalmar Edvardsson,male,18,0,0,7.775
-0,3,Mr. Frederick Charles Sawyer,male,24.5,0,0,8.05
+0,3,Mr. Frederick Charles Sawyer,male,25,0,0,8.05
 1,3,Miss. Anna Sofia Turja,female,18,0,0,9.8417
 0,3,Mrs. Frederick (Augusta Tyler) Goodwin,female,43,1,6,46.9
 1,1,Mr. Thomas Drake Martinez Cardeza,male,36,0,1,512.3292
@@ -730,7 +730,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 0,2,Mr. Robert J Knight,male,41,0,0,0
 0,2,Mr. William John Berriman,male,23,0,0,13
 0,2,Mr. Moses Aaron Troupiansky,male,23,0,0,13
-0,3,Mr. Leslie Williams,male,28.5,0,0,16.1
+0,3,Mr. Leslie Williams,male,29,0,0,16.1
 0,3,Mrs. Edward (Margaret Ann Watson) Ford,female,48,1,3,34.375
 1,1,Mr. Gustave J Lesurer,male,35,0,0,512.3292
 0,3,Mr. Kanio Ivanoff,male,20,0,0,7.8958
@@ -750,7 +750,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 0,3,Mr. Johannes Joseph Vande Velde,male,33,0,0,9.5
 0,3,Mr. Lalio Jonkoff,male,23,0,0,7.8958
 1,2,Mrs. Samuel (Jane Laver) Herman,female,48,1,2,65
-1,2,Master. Viljo Hamalainen,male,0.67,1,1,14.5
+1,2,Master. Viljo Hamalainen,male,1,1,1,14.5
 0,3,Mr. August Sigfrid Carlsson,male,28,0,0,7.7958
 0,2,Mr. Percy Andrew Bailey,male,18,0,0,11.5
 0,3,Mr. Thomas Leonard Theobald,male,34,0,0,8.05
@@ -762,7 +762,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 0,3,Mr. Hans Linus Eklund,male,16,0,0,7.775
 1,1,Mrs. John C (Anna Andrews) Hogeboom,female,51,1,0,77.9583
 0,1,Dr. Arthur Jackson Brewe,male,46,0,0,39.6
-0,3,Miss. Mary Mangan,female,30.5,0,0,7.75
+0,3,Miss. Mary Mangan,female,31,0,0,7.75
 0,3,Mr. Daniel J Moran,male,28,1,0,24.15
 0,3,Mr. Daniel Danielsen Gronnestad,male,32,0,0,8.3625
 0,3,Mr. Rene Aime Lievens,male,24,0,0,9.5
@@ -798,7 +798,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 0,2,Mr. Martin Ponesell,male,34,0,0,13
 1,2,Mrs. Harvey (Charlotte Annie Tate) Collyer,female,31,1,1,26.25
 1,1,Master. William Thornton II Carter,male,11,1,2,120
-1,3,Master. Assad Alexander Thomas,male,0.42,0,1,8.5167
+1,3,Master. Assad Alexander Thomas,male,,0,1,8.5167
 1,3,Mr. Oskar Arvid Hedman,male,27,0,0,6.975
 0,3,Mr. Karl Johan Johansson,male,31,0,0,7.775
 0,1,Mr. Thomas Jr Andrews,male,39,0,0,0
@@ -809,7 +809,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 0,3,Mr. James Lester,male,39,0,0,24.15
 0,2,Mr. Richard James Slemen,male,35,0,0,10.5
 0,3,Miss. Ebba Iris Alfrida Andersson,female,6,4,2,31.275
-0,3,Mr. Ernest Portage Tomlin,male,30.5,0,0,8.05
+0,3,Mr. Ernest Portage Tomlin,male,31,0,0,8.05
 0,1,Mr. Richard Fry,male,39,0,0,0
 0,3,Miss. Wendla Maria Heininen,female,23,0,0,7.925
 0,2,Mr. Albert Mallet,male,31,1,1,37.0042
@@ -826,7 +826,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 1,3,Mr. Thomas Joseph McCormack,male,19,0,0,7.75
 1,1,Mrs. George Nelson (Martha Evelyn) Stone,female,62,0,0,80
 1,3,Mrs. Antoni (Selini Alexander) Yasbeck,female,15,1,0,14.4542
-1,2,Master. George Sibley Richards,male,0.83,1,1,18.75
+1,2,Master. George Sibley Richards,male,1,1,1,18.75
 0,3,Mr. Amin Saad,male,30,0,0,7.2292
 0,3,Mr. Albert Augustsson,male,23,0,0,7.8542
 0,3,Mr. Owen George Allum,male,18,0,0,8.3
@@ -838,7 +838,7 @@ Survived,Pclass,Name,Sex,Age,Siblings/Spouses Aboard,Parents/Children Aboard,Far
 0,3,Mr. Ilmari Rudolf Alhomaki,male,20,0,0,7.925
 0,2,Mr. Thomas Charles Mudd,male,16,0,0,10.5
 1,1,Miss. Augusta Serepeca,female,30,0,0,31
-0,3,Mr. Peter L Lemberopolous,male,34.5,0,0,6.4375
+0,3,Mr. Peter L Lemberopolous,male,35,0,0,6.4375
 0,3,Mr. Jeso Culumovic,male,17,0,0,8.6625
 0,3,Mr. Anthony Abbing,male,42,0,0,7.55
 0,3,Mr. Douglas Bullen Sage,male,18,8,2,69.55
