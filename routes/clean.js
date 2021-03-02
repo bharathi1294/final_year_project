@@ -244,6 +244,23 @@ router.get("/df_save_json",ensureAuthenticated,(req,res)=>{
   })
 })
 
+router.get('/df_rest_api',ensureAuthenticated,(req,res)=>{
+  user_df.to_json("./public/uploads"+filename).then((json) => {
+    req.flash('success_msg',"Your REST API url http://localhost:5000/file/your_data?")
+    res.redirect('/file/clean')
+  }).catch((err)=>{
+    console.log(err)
+  })
+})
+
+router.get("/your_data",(req,res)=>{
+  user_df.to_json("./public/uploads"+filename).then((json) => {
+    res.send(json)
+  }).catch((err)=>{
+    console.log(err)
+  })
+})
+
 //Graph Part
 
 router.get('/chart/:filename',ensureAuthenticated,async(req,res)=>{
