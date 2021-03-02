@@ -4,6 +4,7 @@ const { ensureAuthenticated, forwardAuthenticated } = require('../config/auth');
 const dfd = require('danfojs-node')
 const csv = require('csvtojson')
 const file_db = require('../models/files')
+const fs = require("fs")
 
 var user_df = ''
 var i = 0
@@ -228,6 +229,19 @@ router.get("/df_save_new",ensureAuthenticated,(req,res)=>{
     console.log(err);
     res.redirect('/file/clean')
 })
+})
+
+router.get("/df_save_json",ensureAuthenticated,(req,res)=>{
+  user_df.to_json("./public/uploads"+filename).then((json) => {
+    var filename = 'output.json';
+    var mimetype = 'application/json';
+    res.setHeader('Content-Type', mimetype);
+    res.setHeader('Content-disposition','attachment; filename='+filename);
+    res.send( json );
+  }).catch((err) => {
+      console.log(err);
+      res.redirect('/file/clean')
+  })
 })
 
 //Graph Part
