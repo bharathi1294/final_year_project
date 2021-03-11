@@ -313,9 +313,6 @@ router.get('/ml_file/:filename',ensureAuthenticated,async(req,res)=>{
 })
 
 router.post('/in_out',ensureAuthenticated,(req,res)=>{
-  console.log(req.body.input_column.split(","))
-  console.log(ml_file)
-  console.log(req.body.output_column)
   const python = spawn('python', ['./routes/ml_code.py',ml_file,req.body.input_column,req.body.output_column]);
   python.stdout.on('data', function (data) {
     p_data = data.toString()
