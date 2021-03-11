@@ -111,6 +111,7 @@ router.get('/delete',async (req,res)=>{
   res.redirect('/dashboard')
 }catch(e){
   console.log(e)
+  res.redirect('/dashboard')
 }
 })
 

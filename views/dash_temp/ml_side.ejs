@@ -8,8 +8,13 @@
         <input class="form-control" type="text" data-style="btn-info" name="output_column"><br>
         <button class="btn btn-info">Submit</button>
     </form>
-    <% if(important.length > 0){ %> 
-    <%= important %> 
+    <% if(important.length > 0){ %>
+        <h5>Feature importantance and model score:</h5>
+        <% var b = important.replace(/'/g, '"') %> 
+        <% var c = JSON.parse(b.toString()) %>
+        <% for(var key in c){%>
+        <p><strong><%= key %> - </strong><%= c[key]%></p>
+        <% } %> 
     <% } %> 
 <% } %> 
 <script>
