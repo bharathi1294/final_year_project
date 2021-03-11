@@ -140,5 +140,9 @@ router.get('/visual',ensureAuthenticated,(req,res)=>{
   res.render('dash_temp/visual_main',{title:"Visualization",filename:download_file,dis:false})
 })
 
+router.get('/ml_actions',ensureAuthenticated,(req,res)=>{
+  res.render('dash_temp/ml_main',{title:"ML Operations",filename:download_file,dis:false,ml_columns:[],important:''})
+})
+
 
 module.exports = router;

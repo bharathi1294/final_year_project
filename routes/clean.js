@@ -5,17 +5,22 @@ const dfd = require('danfojs-node')
 const csv = require('csvtojson')
 const file_db = require('../models/files')
 const fs = require("fs")
+const {spawn} = require('child_process');
 
 var user_df = ''
 var i = 0
 var filename = ''
 var graph_df = ''
+var ml_df = ''
+var p_data = ''
 
 router.get('/df_empty',ensureAuthenticated,(req,res)=>{
   user_df = ''
   i=0
   filename = ''
   graph_df = ''
+  ml_df = ''
+  p_data =''
   res.redirect('/dashboard')
 })
 
@@ -250,6 +255,7 @@ router.get('/df_rest_api',ensureAuthenticated,(req,res)=>{
     res.redirect('/file/clean')
   }).catch((err)=>{
     console.log(err)
+    res.redirect('/file/clean')
   })
 })
 
@@ -294,5 +300,31 @@ router.get('/line_c/:x/:y',ensureAuthenticated,(req,res)=>{
   }
 })
 
+
+//ML operations
+
+router.get('/ml_file/:filename',ensureAuthenticated,async(req,res)=>{
+  ml_file = req.params.filename
+  await dfd.read_csv('./public/uploads/'+req.params.filename)
+  .then(df => {
+    ml_df = df.copy()
+  })
+  res.render('dash_temp/ml_main',{title:"ML Operations",filename:req.params.filename,dis:true,ml_columns:ml_df.columns,important:''})
+})
+
+router.post('/in_out',ensureAuthenticated,(req,res)=>{
+  console.log(req.body.input_column.split(","))
+  console.log(ml_file)
+  console.log(req.body.output_column)
+  const python = spawn('python', ['./routes/ml_code.py',ml_file,req.body.input_column,req.body.output_column]);
+  python.stdout.on('data', function (data) {
+    p_data = data.toString()
+  });
+  res.redirect('/file/in_out_api')
+})
+
+router.get('/in_out_api',ensureAuthenticated,(req,res)=>{
+  res.render('dash_temp/ml_main',{title:"ML Operations",filename:ml_file,dis:true,ml_columns:ml_df.columns,important:p_data})
+})
 
 module.exports = router

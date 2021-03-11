@@ -1,0 +1,16 @@
+<% if(dis){%>
+    <strong>The following columns present in the file:</strong><br>
+    <%= ml_columns %> <br><br>
+    <form action="/file/in_out" method="POST">
+        <label>Enter the input columns: </label><p>* All column values must be in numeric</p>
+        <input class="form-control" type="text" data-style="btn-info" name="input_column"><br>
+        <label>Enter the output columns: </label>
+        <input class="form-control" type="text" data-style="btn-info" name="output_column"><br>
+        <button class="btn btn-info">Submit</button>
+    </form>
+    <% if(important.length > 0){ %> 
+    <%= important %> 
+    <% } %> 
+<% } %> 
+<script>
+</script>
