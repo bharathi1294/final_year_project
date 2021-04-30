@@ -312,15 +312,17 @@ router.get('/ml_file/:filename',ensureAuthenticated,async(req,res)=>{
   res.render('dash_temp/ml_main',{title:"ML Operations",filename:req.params.filename,dis:true,ml_columns:ml_df.columns,important:''})
 })
 
-router.post('/in_out',ensureAuthenticated,(req,res)=>{
-  const python = spawn('python', ['./routes/ml_code.py',ml_file,req.body.input_column,req.body.output_column]);
+router.post('/in_out',ensureAuthenticated,async(req,res)=>{
+ const python = await spawn('python', ['./routes/ml_code.py',ml_file,req.body.input_column,req.body.output_column]);
   python.stdout.on('data', function (data) {
     p_data = data.toString()
   });
+  await new Promise(resolve => setTimeout(resolve, 2000));
   res.redirect('/file/in_out_api')
 })
 
-router.get('/in_out_api',ensureAuthenticated,(req,res)=>{
+router.get('/in_out_api',ensureAuthenticated,async(req,res)=>{
+  await new Promise(resolve => setTimeout(resolve, 2000));
   res.render('dash_temp/ml_main',{title:"ML Operations",filename:ml_file,dis:true,ml_columns:ml_df.columns,important:p_data})
 })
 
