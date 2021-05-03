@@ -313,9 +313,11 @@ router.get('/ml_file/:filename',ensureAuthenticated,async(req,res)=>{
 })
 
 router.post('/in_out',ensureAuthenticated,async(req,res)=>{
+  console.log(ml_file)
  const python = await spawn('python', ['./routes/ml_code.py',ml_file,req.body.input_column,req.body.output_column]);
   python.stdout.on('data', function (data) {
     p_data = data.toString()
+    console.log(p_data)
   });
   await new Promise(resolve => setTimeout(resolve, 2000));
   res.redirect('/file/in_out_api')
