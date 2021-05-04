@@ -12,9 +12,16 @@
         <h5>Feature importantance and model score:</h5>
         <% var b = important.replace(/'/g, '"') %> 
         <% var c = JSON.parse(b.toString()) %>
-        <% for(var key in c){%>
-        <p><strong><%= key %> - </strong><%= c[key]%></p>
-        <% } %> 
+            <table class="table table-striped table-hover">
+                <tbody>
+                    <% for(var key in c){%>
+                    <tr>
+                        <td><%= key %></td>
+                        <td><%= c[key]*100%></td>
+                    </tr>
+                    <% } %> 
+                </tbody>
+            </table>   
     <% }%>
 <% } %> 
 <script>

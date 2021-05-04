@@ -270,6 +270,7 @@ router.get("/your_data",(req,res)=>{
 //Graph Part
 
 router.get('/chart/:filename',ensureAuthenticated,async(req,res)=>{
+  console.log(req.params.filename)
   await dfd.read_csv('./public/uploads/'+req.params.filename)
   .then(df => {
     graph_df = df.copy()
@@ -319,12 +320,12 @@ router.post('/in_out',ensureAuthenticated,async(req,res)=>{
     p_data = data.toString()
     console.log(p_data)
   });
-  await new Promise(resolve => setTimeout(resolve, 2000));
+  await new Promise(resolve => setTimeout(resolve, 3000));
   res.redirect('/file/in_out_api')
 })
 
 router.get('/in_out_api',ensureAuthenticated,async(req,res)=>{
-  await new Promise(resolve => setTimeout(resolve, 2000));
+  await new Promise(resolve => setTimeout(resolve, 3000));
   res.render('dash_temp/ml_main',{title:"ML Operations",filename:ml_file,dis:true,ml_columns:ml_df.columns,important:p_data})
 })
 
